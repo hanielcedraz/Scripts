@@ -1,0 +1,1 @@
+for i in $(ls 01-BWA_mappedTestis/*.bam); do a=`basename $i | cut -d"_" -f1,2,3,4`; samtools mpileup -uf gatk_analysis/referenceGenome.fa $i | bcftools-1.12/bcftools call -mv | bcftools-1.12/bcftools filter -s LowQual -e '%QUAL<20 || DP>100' > VCFfiles/$a".vcf"; done
